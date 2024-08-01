@@ -14,7 +14,7 @@
 
 1. Клонируйте репозиторий:
    git clone https://github.com/KiryaScript/github-notices-discord.git
-   
+
    cd github-notices-discord
 
 2. Установите зависимости:
@@ -42,7 +42,7 @@ await asyncio.sleep(30)
 ## Запуск
 Запустите бота командой:
 
-# python bot.py
+python bot.py
 
 ## Логи
 
