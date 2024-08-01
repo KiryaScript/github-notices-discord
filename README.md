@@ -13,8 +13,9 @@
 ## Установка
 
 1. Клонируйте репозиторий:
-   git clone https://github.com/your-username/github-discord-update-bot.git
-   cd github-discord-update-bot
+   git clone https://github.com/KiryaScript/github-notices-discord.git
+   
+   cd github-notices-discord
 
 2. Установите зависимости:
 
