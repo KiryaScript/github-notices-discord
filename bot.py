@@ -5,6 +5,7 @@ import os
 import logging
 import json
 from dotenv import load_dotenv
+import threading
 
 load_dotenv()
 
@@ -96,10 +97,27 @@ async def send_update(discord_channel, commit, repo):
     except Exception as e:
         logging.error(f"Unexpected error when sending message to Discord: {e}")
 
+async def send_message(channel_id, message):
+    channel = client.get_channel(int(channel_id))
+    if channel:
+        await channel.send(message)
+        print(f"Сообщение отправлено в канал {channel.name}")
+    else:
+        print("Канал не найден")
+
+def user_input():
+    while True:
+        channel_id = input("Введите ID канала: ")
+        message = input("Введите сообщение: ")
+        asyncio.run_coroutine_threadsafe(send_message(channel_id, message), client.loop)
+
 @client.event
 async def on_ready():
     print(f'{client.user} has connected to Discord!')
     logging.info(f'Bot {client.user} has connected to Discord!')
     client.loop.create_task(check_github_updates())
+    
+    # Запускаем поток для пользовательского ввода
+    threading.Thread(target=user_input, daemon=True).start()
 
 client.run(DISCORD_TOKEN)
